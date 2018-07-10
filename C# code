@@ -1,0 +1,43 @@
+const decimal HOURLY_RATE = 2.5m;
+            const decimal MAX_FEE = 20;
+
+            int[] hours = new int[100];
+            int counter = 0;
+            decimal average = 0, total = 0;
+            decimal ParkingFee;
+            string line = "";
+            StreamReader myStreamReaderSR = new StreamReader("hours.txt");
+            
+
+            line = myStreamReaderSR.ReadLine();
+
+            while (line != null)
+            {
+                hours[counter] = int.Parse(line);
+                counter = counter + 1;
+                line = myStreamReaderSR.ReadLine();
+            }
+
+            myStreamReaderSR.Close();
+
+            Console.WriteLine("HOURS  PARKING FEE");
+
+            for (int I = 0; I < counter; I++) 
+            {
+                ParkingFee = hours[I] * HOURLY_RATE;
+
+                if (ParkingFee > MAX_FEE)
+                {
+                    ParkingFee = MAX_FEE;
+                }
+    
+                Console.WriteLine("{0,2}   {1,8} ", hours[I], ParkingFee.ToString("C"));
+                total = total + ParkingFee;
+            }
+
+            average = (decimal)total / counter;
+
+            Console.WriteLine("Average Parking Fee is: " + average.ToString("C"));
+            
+
+            Console.ReadKey();
